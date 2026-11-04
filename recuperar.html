@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Recupera el acceso a tu cuenta de paciente de Vital Dent.">
+  <title>Recuperar contraseña · Vital Dent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<!-- Sitio público: recuperar contraseña (requisito RF por confirmar) -->
+<body class="simple acceso-pagina">
+  <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
+  <header>
+    <a class="marca" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#0E5E6F"/><path d="M22 14c-5 0-8 4-8 9 0 6 3 9 4 14 1 6 2 13 5.5 13 3.2 0 3.4-9 8.5-9s5.3 9 8.5 9C44 50 45 43 46 37c1-5 4-8 4-14 0-5-3-9-8-9-4 0-6 2-10 2s-6-2-10-2z" fill="#fff"/></svg><span>Vital Dent</span></a>
+    <a href="index.html">← Volver al sitio</a>
+  </header>
+
+  <main id="contenido">
+    <div class="acceso-caja">
+      <div class="tarjeta">
+        <h1>Recuperar contraseña</h1>
+        <p class="secundario">Escribe el correo de tu cuenta y te enviaremos un enlace para crear una contraseña nueva.</p>
+        <form id="form-recuperar" action="/api/sesion/recuperar" method="post" novalidate>
+          <div class="campo">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" autocomplete="email" required aria-describedby="error-correo">
+            <p class="mensaje-error" id="error-correo" hidden>Escribe un correo válido.</p>
+          </div>
+          <button class="boton bloque" type="submit">Enviar enlace</button>
+        </form>
+        <p class="aviso info" id="enviado" role="status" hidden>Si el correo está registrado, recibirás un enlace en los próximos minutos. Revisa también tu carpeta de spam.</p>
+      </div>
+      <p class="alterno"><a href="login.html">← Volver a iniciar sesión</a></p>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <p>© 2026 Consultorio Vital Dent · Av. Juárez 45, Centro, Huejutla, Hgo. · Tel. <a href="tel:+527898961020">789 896 1020</a></p>
+  </footer>
+
+  <!-- Demostración en GitHub Pages: no se envía ningún correo -->
+  <script>
+    document.getElementById("form-recuperar").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var correo = document.getElementById("correo");
+      var valido = correo.validity.valid;
+      correo.setAttribute("aria-invalid", valido ? "false" : "true");
+      document.getElementById("error-correo").hidden = valido;
+      if (valido) { this.hidden = true; document.getElementById("enviado").hidden = false; }
+    });
+  </script>
+</body>
+</html>

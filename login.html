@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Entra a tu portal de paciente de Vital Dent.">
+  <title>Iniciar sesión · Vital Dent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<!-- Sitio público: iniciar sesión (requisito RF por confirmar) · enlaza con RF-07 Control de acceso -->
+<body class="simple acceso-pagina">
+  <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
+  <header>
+    <a class="marca" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#0E5E6F"/><path d="M22 14c-5 0-8 4-8 9 0 6 3 9 4 14 1 6 2 13 5.5 13 3.2 0 3.4-9 8.5-9s5.3 9 8.5 9C44 50 45 43 46 37c1-5 4-8 4-14 0-5-3-9-8-9-4 0-6 2-10 2s-6-2-10-2z" fill="#fff"/></svg><span>Vital Dent</span></a>
+    <a href="index.html">← Volver al sitio</a>
+  </header>
+
+  <main id="contenido">
+    <div class="acceso-caja">
+      <div class="tarjeta">
+        <h1>Iniciar sesión</h1>
+        <p class="secundario">Entra a tu portal de paciente.</p>
+        <form id="form-acceso" action="/api/sesion/iniciar" method="post" novalidate>
+          <p class="aviso error" id="error-acceso" role="alert" hidden>Correo o contraseña incorrectos. Revisa tus datos e inténtalo de nuevo.</p>
+          <div class="campo">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" autocomplete="email" required>
+          </div>
+          <div class="campo">
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" name="contrasena" autocomplete="current-password" required>
+          </div>
+          <div class="fila-entre">
+            <label class="casilla"><input type="checkbox" name="recordar"> Mantener sesión iniciada</label>
+            <a href="recuperar.html">¿Olvidaste tu contraseña?</a>
+          </div>
+          <button class="boton bloque" type="submit">Entrar</button>
+        </form>
+        <p class="demo">Demostración: escribe cualquier correo y contraseña para entrar al portal.</p>
+      </div>
+      <p class="alterno">¿Aún no tienes cuenta? <a href="registro.html">Crea una aquí</a></p>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <p>© 2026 Consultorio Vital Dent · Av. Juárez 45, Centro, Huejutla, Hgo. · Tel. <a href="tel:+527898961020">789 896 1020</a></p>
+  </footer>
+
+  <!-- Demostración en GitHub Pages: no hay servidor, así que se valida en el navegador y se abre el portal -->
+  <script>
+    document.getElementById("form-acceso").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var error = document.getElementById("error-acceso");
+      var valido = this.checkValidity();
+      error.hidden = valido;
+      this.querySelectorAll("input[required]").forEach(function (c) { c.setAttribute("aria-invalid", c.validity.valid ? "false" : "true"); });
+      if (valido) window.location.href = "inicio.html";
+    });
+  </script>
+</body>
+</html>

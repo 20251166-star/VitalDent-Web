@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Crea tu cuenta de paciente en Vital Dent para agendar citas en línea.">
+  <title>Crear cuenta · Vital Dent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<!-- Sitio público: registro de paciente (requisito RF por confirmar) · al terminar abre RF-12 Cuestionario inicial -->
+<body class="simple acceso-pagina">
+  <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
+  <header>
+    <a class="marca" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#0E5E6F"/><path d="M22 14c-5 0-8 4-8 9 0 6 3 9 4 14 1 6 2 13 5.5 13 3.2 0 3.4-9 8.5-9s5.3 9 8.5 9C44 50 45 43 46 37c1-5 4-8 4-14 0-5-3-9-8-9-4 0-6 2-10 2s-6-2-10-2z" fill="#fff"/></svg><span>Vital Dent</span></a>
+    <a href="index.html">← Volver al sitio</a>
+  </header>
+
+  <main id="contenido">
+    <div class="acceso-caja ancha">
+      <nav aria-label="Progreso del registro">
+        <ol class="pasos" style="margin-bottom:16px">
+          <li aria-current="step">Crear cuenta</li>
+          <li>Datos personales</li>
+          <li>Cuestionario</li>
+        </ol>
+      </nav>
+      <div class="tarjeta">
+        <h1>Crea tu cuenta</h1>
+        <p class="secundario">Los campos con <span class="obligatorio" aria-hidden="true">*</span> son obligatorios.</p>
+        <form id="form-registro" action="/api/paciente/registro" method="post" novalidate>
+          <div class="rejilla rejilla-2">
+            <div class="campo">
+              <label for="nombre">Nombre(s) <span class="obligatorio" aria-hidden="true">*</span></label>
+              <input type="text" id="nombre" name="nombre" autocomplete="given-name" required>
+            </div>
+            <div class="campo">
+              <label for="apellidos">Apellidos <span class="obligatorio" aria-hidden="true">*</span></label>
+              <input type="text" id="apellidos" name="apellidos" autocomplete="family-name" required>
+            </div>
+            <div class="campo">
+              <label for="telefono">Teléfono <span class="obligatorio" aria-hidden="true">*</span></label>
+              <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" inputmode="numeric" autocomplete="tel" required aria-describedby="ayuda-tel">
+              <p class="ayuda" id="ayuda-tel">10 dígitos, sin espacios.</p>
+            </div>
+            <div class="campo">
+              <label for="nacimiento">Fecha de nacimiento <span class="obligatorio" aria-hidden="true">*</span></label>
+              <input type="date" id="nacimiento" name="nacimiento" autocomplete="bday" required>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="correo">Correo electrónico <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input type="email" id="correo" name="correo" autocomplete="email" required>
+          </div>
+          <div class="rejilla rejilla-2">
+            <div class="campo">
+              <label for="contrasena">Contraseña <span class="obligatorio" aria-hidden="true">*</span></label>
+              <input type="password" id="contrasena" name="contrasena" autocomplete="new-password" minlength="8" pattern="(?=.*[A-Z])(?=.*[0-9]).{8,}" required aria-describedby="reglas">
+              <p class="ayuda" id="reglas">Mínimo 8 caracteres, una mayúscula y un número.</p>
+            </div>
+            <div class="campo">
+              <label for="confirmar">Confirmar contraseña <span class="obligatorio" aria-hidden="true">*</span></label>
+              <input type="password" id="confirmar" name="confirmar" autocomplete="new-password" required aria-describedby="error-confirmar">
+              <p class="mensaje-error" id="error-confirmar" role="alert" hidden>Las contraseñas no coinciden.</p>
+            </div>
+          </div>
+          <label class="casilla"><input type="checkbox" name="aviso" required> <span>Acepto el aviso de privacidad y el uso de mis datos para mi atención dental. <span class="obligatorio" aria-hidden="true">*</span></span></label>
+          <p class="aviso error" id="error-registro" role="alert" hidden>Revisa los campos marcados en rojo.</p>
+          <button class="boton bloque" type="submit">Crear cuenta</button>
+        </form>
+      </div>
+      <p class="alterno">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <p>© 2026 Consultorio Vital Dent · Av. Juárez 45, Centro, Huejutla, Hgo. · Tel. <a href="tel:+527898961020">789 896 1020</a></p>
+  </footer>
+
+  <!-- Demostración en GitHub Pages: se valida en el navegador y se continúa al cuestionario inicial -->
+  <script>
+    document.getElementById("form-registro").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var confirmar = document.getElementById("confirmar");
+      var coinciden = confirmar.value === document.getElementById("contrasena").value;
+      confirmar.setCustomValidity(coinciden ? "" : "No coinciden");
+      document.getElementById("error-confirmar").hidden = coinciden || !confirmar.value;
+      this.querySelectorAll("input[required]").forEach(function (c) { c.setAttribute("aria-invalid", c.validity.valid ? "false" : "true"); });
+      var valido = this.checkValidity();
+      document.getElementById("error-registro").hidden = valido;
+      if (valido) window.location.href = "bienvenida.html";
+    });
+  </script>
+</body>
+</html>

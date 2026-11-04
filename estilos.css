@@ -182,3 +182,92 @@ td:first-child, td time, td data { white-space: nowrap; }
 }
 .tabla-contenedor { position: relative; }
 .menu a { white-space: nowrap; }
+
+/* ==========================================================
+   Sitio público (visitantes): index, login, registro, recuperar
+   ========================================================== */
+.publico { background: #fff; }
+.publico-cabecera { position: sticky; top: 0; z-index: 5; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--linea); }
+.publico-cabecera .envoltura { display: flex; align-items: center; gap: 20px; min-height: 68px; }
+.publico-cabecera .marca { color: var(--teal); margin: 0; }
+.publico-menu { margin-left: auto; }
+.publico-menu ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; }
+.publico-menu a { display: block; padding: 8px 12px; border-radius: 8px; color: var(--tinta); text-decoration: none; font-size: .92rem; }
+.publico-menu a:hover { background: var(--hielo); color: var(--teal); }
+.publico-cabecera .boton { min-height: 40px; }
+.envoltura { width: min(1120px, 100% - 32px); margin: 0 auto; }
+
+.portada { background: linear-gradient(135deg, var(--teal-oscuro), var(--teal) 60%, #13788B); color: #fff; padding: 72px 0; }
+.portada .envoltura { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+.portada h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 14px; }
+.portada p { color: #d6ecef; font-size: 1.05rem; max-width: 34em; }
+.portada .acciones { justify-content: flex-start; margin-top: 22px; }
+.portada .boton { background: #fff; color: var(--teal); border-color: #fff; }
+.portada .boton:hover { background: var(--menta-claro); }
+.portada .boton.secundario-btn { background: transparent; color: #fff; border-color: rgba(255,255,255,.6); }
+.portada .boton.secundario-btn:hover { background: rgba(255,255,255,.1); }
+.portada-tarjeta { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 18px; padding: 24px; }
+.portada-tarjeta h2 { font-size: 1rem; }
+.portada-tarjeta ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.portada-tarjeta li { display: flex; gap: 10px; align-items: flex-start; color: #e6f4f5; }
+.portada-tarjeta li::before { content: "✓"; flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--menta); color: #fff; display: grid; place-items: center; font-size: .75rem; font-weight: 600; margin-top: 1px; }
+
+.seccion { padding: 64px 0; }
+.seccion.alterna { background: var(--hielo); }
+.seccion-titulo { text-align: center; max-width: 640px; margin: 0 auto 32px; }
+.seccion-titulo h2 { font-size: 1.6rem; }
+.seccion-titulo p { color: var(--gris); }
+.rejilla-servicios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; list-style: none; margin: 0; padding: 0; }
+.servicio { height: 100%; }
+.servicio .icono { width: 44px; height: 44px; border-radius: 12px; background: var(--menta-claro); color: var(--teal); display: grid; place-items: center; margin-bottom: 12px; }
+.servicio .icono svg { width: 24px; height: 24px; }
+.servicio p { color: var(--gris); font-size: .9rem; margin: 0; }
+.rejilla-pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; list-style: none; margin: 0; padding: 0; counter-reset: paso-publico; }
+.rejilla-pasos li { counter-increment: paso-publico; }
+.rejilla-pasos li::before { content: counter(paso-publico); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--teal); color: #fff; font-weight: 600; margin-bottom: 12px; }
+.rejilla-pasos p { color: var(--gris); font-size: .9rem; margin: 0; }
+.equipo { display: flex; gap: 16px; align-items: center; }
+.equipo .avatar { width: 64px; height: 64px; font-size: 1.3rem; flex: none; }
+.horario { width: 100%; font-size: .92rem; }
+.horario th, .horario td { background: none; padding: 8px 0; border-bottom: 1px solid var(--linea); font-size: .92rem; color: var(--tinta); }
+.horario th { font-weight: 500; }
+.horario td { text-align: right; }
+.horario tr:last-child th, .horario tr:last-child td { border-bottom: 0; }
+.llamado { background: var(--teal); color: #fff; border-radius: 18px; padding: 36px; display: flex; gap: 20px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.llamado p { color: #d6ecef; margin: 0; }
+.llamado .boton { background: #fff; color: var(--teal); border-color: #fff; }
+
+.publico-pie { background: var(--teal-oscuro); color: #cfe3e6; padding: 36px 0 24px; font-size: .88rem; }
+.publico-pie .envoltura { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 24px; }
+.publico-pie .marca { margin: 0 0 10px; }
+.publico-pie h2 { font-size: .95rem; color: #fff; }
+.publico-pie ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.publico-pie a { color: #fff; }
+.publico-pie .legal { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.15); padding-top: 16px; margin: 8px 0 0; color: #a9c7cc; font-size: .8rem; }
+
+/* Páginas de acceso (login, registro, recuperar) */
+.acceso-pagina { min-height: 100vh; display: flex; flex-direction: column; background: var(--hielo); }
+.acceso-pagina main { flex: 1; display: grid; place-items: center; padding: 32px 16px; }
+.acceso-caja { width: min(440px, 100%); }
+.acceso-caja.ancha { width: min(620px, 100%); }
+.acceso-caja .tarjeta { padding: 28px; }
+.acceso-caja h1 { margin-bottom: 4px; }
+.acceso-caja .alterno { text-align: center; margin: 16px 0 0; font-size: .9rem; }
+.fila-entre { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font-size: .88rem; }
+.casilla { display: flex; gap: 8px; align-items: flex-start; font-size: .88rem; }
+.casilla input { width: auto; min-height: 0; margin-top: 4px; accent-color: var(--teal); }
+.boton.bloque { width: 100%; }
+.demo { font-size: .78rem; color: var(--gris); text-align: center; margin-top: 12px; }
+
+@media (max-width: 960px) {
+  .portada .envoltura, .publico-pie .envoltura { grid-template-columns: 1fr; }
+  .rejilla-servicios, .rejilla-pasos { grid-template-columns: 1fr 1fr; }
+  .publico-menu { display: none; }
+  .publico-cabecera .acciones { margin-left: auto; }
+}
+@media (max-width: 600px) {
+  .rejilla-servicios, .rejilla-pasos { grid-template-columns: 1fr; }
+  .portada { padding: 48px 0; }
+  .seccion { padding: 44px 0; }
+  .publico-cabecera .boton.secundario-btn { display: none; }
+}
