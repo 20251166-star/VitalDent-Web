@@ -2,10 +2,215 @@
 <html lang="es-MX">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=inicio.html">
-  <title>Vital Dent</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Consultorio dental Vital Dent en Huejutla, Hidalgo: limpieza, ortodoncia, endodoncia y más. Agenda tu cita en línea.">
+  <title>Vital Dent · Consultorio dental en Huejutla</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
 </head>
-<body>
-  <p>Redirigiendo a <a href="inicio.html">Vital Dent</a>…</p>
+<!-- Sitio público: página principal para visitantes (requisitos RF por confirmar) -->
+<body class="publico">
+  <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
+  <!-- Encabezado público: marca, navegación por secciones y acceso al portal -->
+  <header class="publico-cabecera">
+    <div class="envoltura">
+      <a class="marca" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#0E5E6F"/><path d="M22 14c-5 0-8 4-8 9 0 6 3 9 4 14 1 6 2 13 5.5 13 3.2 0 3.4-9 8.5-9s5.3 9 8.5 9C44 50 45 43 46 37c1-5 4-8 4-14 0-5-3-9-8-9-4 0-6 2-10 2s-6-2-10-2z" fill="#fff"/></svg><span>Vital Dent</span></a>
+      <nav class="publico-menu" aria-label="Secciones del sitio">
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="acciones">
+        <a class="boton secundario-btn" href="registro.html">Crear cuenta</a>
+        <a class="boton" href="login.html">Iniciar sesión</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- Portada: mensaje principal y llamadas a la acción -->
+    <section class="portada" aria-labelledby="t-portada">
+      <div class="envoltura">
+        <div>
+          <h1 id="t-portada">Tu sonrisa, en buenas manos</h1>
+          <p>En Vital Dent cuidamos tu salud bucal con atención cercana. Agenda tus citas, consulta tus tratamientos y paga en línea desde tu portal de paciente.</p>
+          <div class="acciones">
+            <a class="boton" href="registro.html">Agenda tu primera cita</a>
+            <a class="boton secundario-btn" href="tel:+527898961020">Llamar al 789 896 1020</a>
+          </div>
+        </div>
+        <div class="portada-tarjeta">
+          <h2>Con tu cuenta de paciente puedes:</h2>
+          <ul>
+            <li>Agendar citas viendo solo los horarios disponibles</li>
+            <li>Ver el avance de tus tratamientos sesión por sesión</li>
+            <li>Consultar tu historial médico cuando lo necesites</li>
+            <li>Pagar en línea y descargar tus comprobantes</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Servicios del consultorio -->
+    <section class="seccion" id="servicios" aria-labelledby="t-servicios">
+      <div class="envoltura">
+        <div class="seccion-titulo">
+          <h2 id="t-servicios">Nuestros servicios</h2>
+          <p>Atención dental general y especializada para toda la familia.</p>
+        </div>
+        <ul class="rejilla-servicios">
+          <li class="tarjeta servicio">
+            <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+            <h3>Valoración general</h3>
+            <p>Revisión completa de tu boca y un plan de tratamiento claro desde la primera visita.</p>
+          </li>
+          <li class="tarjeta servicio">
+            <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg></span>
+            <h3>Limpieza dental</h3>
+            <p>Eliminamos sarro y placa para prevenir caries y problemas en las encías.</p>
+          </li>
+          <li class="tarjeta servicio">
+            <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="6" rx="2"/><path d="M7 9v6M12 9v6M17 9v6"/></svg></span>
+            <h3>Ortodoncia</h3>
+            <p>Brackets para alinear tus dientes, con seguimiento del avance en cada ajuste.</p>
+          </li>
+          <li class="tarjeta servicio">
+            <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M8 6h8M8 18h8"/></svg></span>
+            <h3>Endodoncia</h3>
+            <p>Tratamiento de conductos para salvar piezas dañadas y quitar el dolor.</p>
+          </li>
+          <li class="tarjeta servicio">
+            <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg></span>
+            <h3>Urgencias y dolor</h3>
+            <p>Atendemos dolor, inflamación o piezas rotas lo antes posible.</p>
+          </li>
+          <li class="tarjeta servicio">
+            <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span>
+            <h3>Estética dental</h3>
+            <p>Blanqueamiento y resinas para que te sientas seguro al sonreír.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Cómo funciona el portal para un paciente nuevo -->
+    <section class="seccion alterna" id="como-funciona" aria-labelledby="t-como">
+      <div class="envoltura">
+        <div class="seccion-titulo">
+          <h2 id="t-como">Agenda en 3 pasos</h2>
+          <p>Sin filas ni llamadas: todo desde tu celular o computadora.</p>
+        </div>
+        <ol class="rejilla-pasos">
+          <li class="tarjeta">
+            <h3>Crea tu cuenta</h3>
+            <p>Regístrate con tu nombre, teléfono y correo.</p>
+          </li>
+          <li class="tarjeta">
+            <h3>Llena tu cuestionario</h3>
+            <p>Cuéntanos tus antecedentes para que el doctor te conozca antes de la consulta.</p>
+          </li>
+          <li class="tarjeta">
+            <h3>Elige día y hora</h3>
+            <p>Escoge entre los horarios disponibles y recibe la confirmación del consultorio.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Equipo y horario -->
+    <section class="seccion" id="nosotros" aria-labelledby="t-nosotros">
+      <div class="envoltura">
+        <div class="seccion-titulo">
+          <h2 id="t-nosotros">Nosotros</h2>
+          <p>Un consultorio de confianza en el centro de Huejutla.</p>
+        </div>
+        <div class="rejilla rejilla-2">
+          <article class="tarjeta">
+            <div class="equipo">
+              <span class="avatar" aria-hidden="true">AR</span>
+              <div>
+                <h3 style="margin:0">Dr. Andrés Ruiz</h3>
+                <p class="secundario" style="margin:0">Cirujano dentista · Ortodoncia y endodoncia</p>
+              </div>
+            </div>
+            <p style="margin-top:14px">Te explicamos cada paso de tu tratamiento y puedes seguir tu avance desde el portal, sesión por sesión.</p>
+          </article>
+          <article class="tarjeta">
+            <h3>Horario de atención</h3>
+            <table class="horario">
+              <caption class="visualmente-oculto">Horario de atención del consultorio</caption>
+              <tbody>
+                <tr><th scope="row">Lunes a viernes</th><td>9:00 a. m. – 7:00 p. m.</td></tr>
+                <tr><th scope="row">Sábado</th><td>9:00 a. m. – 2:00 p. m.</td></tr>
+                <tr><th scope="row">Domingo</th><td>Cerrado</td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto y ubicación -->
+    <section class="seccion alterna" id="contacto" aria-labelledby="t-contacto">
+      <div class="envoltura">
+        <div class="seccion-titulo">
+          <h2 id="t-contacto">Contacto</h2>
+          <p>Visítanos o llámanos; con gusto resolvemos tus dudas.</p>
+        </div>
+        <div class="rejilla rejilla-2">
+          <div class="tarjeta">
+            <dl class="datos">
+              <dt>Dirección</dt>
+              <dd>Av. Juárez 45, Centro, Huejutla, Hgo.</dd>
+              <dt>Teléfono</dt>
+              <dd><a href="tel:+527898961020">789 896 1020</a></dd>
+              <dt>Cómo llegar</dt>
+              <dd><a href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Ju%C3%A1rez+45+Centro+Huejutla+Hidalgo" target="_blank" rel="noopener">Ver en Google Maps</a></dd>
+            </dl>
+          </div>
+          <div class="llamado">
+            <div>
+              <h3 style="margin:0 0 4px">¿Ya eres paciente?</h3>
+              <p>Entra a tu portal para ver tus citas y pagos.</p>
+            </div>
+            <a class="boton" href="login.html">Iniciar sesión</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie de página público -->
+  <footer class="publico-pie">
+    <div class="envoltura">
+      <div>
+        <a class="marca" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#fff"/><path d="M22 14c-5 0-8 4-8 9 0 6 3 9 4 14 1 6 2 13 5.5 13 3.2 0 3.4-9 8.5-9s5.3 9 8.5 9C44 50 45 43 46 37c1-5 4-8 4-14 0-5-3-9-8-9-4 0-6 2-10 2s-6-2-10-2z" fill="#0E5E6F"/></svg><span>Vital Dent</span></a>
+        <p>Consultorio dental en Huejutla, Hidalgo.</p>
+      </div>
+      <div>
+        <h2>Sitio</h2>
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Pacientes</h2>
+        <ul>
+          <li><a href="login.html">Iniciar sesión</a></li>
+          <li><a href="registro.html">Crear cuenta</a></li>
+          <li><a href="recuperar.html">Recuperar contraseña</a></li>
+        </ul>
+      </div>
+      <p class="legal">© 2026 Consultorio Vital Dent · Av. Juárez 45, Centro, Huejutla, Hgo. · Tel. 789 896 1020</p>
+    </div>
+  </footer>
 </body>
 </html>
