@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portal del paciente de Vital Dent: inicio.">
+  <title>Inicio · Vital Dent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<!-- RF-40 Panel del paciente · RF-07 Control de acceso · RNF-05, RNF-06 -->
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
+  <div class="portal">
+    <!-- Barra lateral: marca, rol y navegación principal del paciente -->
+    <header class="lateral">
+      <a class="marca" href="inicio.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#fff"/><path d="M22 14c-5 0-8 4-8 9 0 6 3 9 4 14 1 6 2 13 5.5 13 3.2 0 3.4-9 8.5-9s5.3 9 8.5 9C44 50 45 43 46 37c1-5 4-8 4-14 0-5-3-9-8-9-4 0-6 2-10 2s-6-2-10-2z" fill="#0E5E6F"/></svg><span>Vital Dent</span></a>
+      <p class="rol">Rol: Paciente</p>
+      <nav class="menu" aria-label="Navegación del paciente">
+        <ul>
+          <li><a href="inicio.html" aria-current="page">Inicio</a></li>
+          <li><a href="citas.html">Mis citas</a></li>
+          <li><a href="tratamientos.html">Tratamientos</a></li>
+          <li><a href="historial.html">Historial médico</a></li>
+          <li><a href="pagos.html">Pagos</a></li>
+          <li><a href="perfil.html">Mi perfil</a></li>
+        </ul>
+      </nav>
+      <!-- RF-06: cerrar sesión se envía con POST para invalidar la sesión en el servidor -->
+      <form action="/api/sesion/cerrar" method="post">
+        <button type="submit">Cerrar sesión</button>
+      </form>
+    </header>
+
+    <div class="principal">
+      <!-- Encabezado de la página: título y usuario con sesión -->
+      <div class="barra-superior">
+        <div>
+          <h1>Hola, Mariana</h1>
+          <p>Este es el resumen de tu atención</p>
+        </div>
+        <div class="usuario">
+          <span class="avatar" aria-hidden="true">ML</span>
+          <span><strong>Mariana López</strong><br>Paciente</span>
+        </div>
+      </div>
+
+      <main id="contenido" class="contenido">
+        <!-- Resumen rápido: próxima cita y saldo -->
+        <div class="rejilla rejilla-2">
+          <section class="tarjeta destacado" aria-labelledby="t-proxima">
+            <h2 id="t-proxima">Tu próxima cita</h2>
+            <p><strong>Ajuste de brackets</strong></p>
+            <p class="secundario">
+              <time datetime="2026-11-12T10:30">Jueves 12 de noviembre, 10:30 a. m.</time> · Dr. Andrés Ruiz
+            </p>
+            <p><span class="estado ok">Confirmada</span></p>
+          </section>
+
+          <section class="tarjeta" aria-labelledby="t-saldo">
+            <h2 id="t-saldo">Saldo pendiente</h2>
+            <p class="monto"><data value="1800">$1,800.00</data></p>
+            <p class="secundario">Endodoncia pieza 36 · sesión 2</p>
+            <a class="boton" href="pagos.html#realizar-pago">Pagar</a>
+          </section>
+        </div>
+
+        <!-- Accesos rápidos a los módulos del paciente -->
+        <nav aria-label="Accesos rápidos">
+          <ul class="rejilla rejilla-accesos" style="list-style:none;margin:0;padding:0">
+            <li><a class="tarjeta acceso" href="citas.html#agendar"><strong>Agendar cita</strong><span>Elige día y hora</span></a></li>
+            <li><a class="tarjeta acceso" href="tratamientos.html"><strong>Tratamientos</strong><span>2 en curso</span></a></li>
+            <li><a class="tarjeta acceso" href="historial.html"><strong>Historial médico</strong><span>Solo lectura</span></a></li>
+            <li><a class="tarjeta acceso" href="pagos.html"><strong>Pagos</strong><span>1 pendiente</span></a></li>
+            <li><a class="tarjeta acceso" href="perfil.html"><strong>Mi perfil</strong><span>Datos de contacto</span></a></li>
+          </ul>
+        </nav>
+
+        <div class="rejilla rejilla-2">
+          <section class="tarjeta" aria-labelledby="t-avance">
+            <h2 id="t-avance">Avance de tratamientos</h2>
+            <p><label for="av-orto">Ortodoncia fija · sesión 9 de 15</label></p>
+            <progress id="av-orto" max="100" value="60">60 %</progress>
+            <p style="margin-top:12px"><label for="av-endo">Endodoncia pieza 36 · sesión 1 de 3</label></p>
+            <progress id="av-endo" max="100" value="33">33 %</progress>
+          </section>
+
+          <section class="tarjeta" aria-labelledby="t-actividad">
+            <h2 id="t-actividad">Actividad reciente</h2>
+            <ul class="lista-simple">
+              <li><span>El consultorio confirmó tu cita del 12 de noviembre</span><time datetime="2026-10-28">28 oct</time></li>
+              <li><span>Nueva receta: ibuprofeno 400 mg</span><time datetime="2026-10-24">24 oct</time></li>
+              <li><span>Pago aprobado por $950.00</span><time datetime="2026-10-24">24 oct</time></li>
+            </ul>
+          </section>
+        </div>
+      </main>
+
+      <footer class="pie">
+        <p>© 2026 Consultorio Vital Dent · Av. Juárez 45, Centro, Huejutla, Hgo. · Tel. <a href="tel:+527898961020">789 896 1020</a></p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

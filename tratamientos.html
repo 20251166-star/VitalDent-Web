@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portal del paciente de Vital Dent: tratamientos.">
+  <title>Tratamientos · Vital Dent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<!-- RF-35 Consultar tratamientos · RF-36 Consultar avance · RNF-12, RNF-14 -->
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
+  <div class="portal">
+    <!-- Barra lateral: marca, rol y navegación principal del paciente -->
+    <header class="lateral">
+      <a class="marca" href="inicio.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#fff"/><path d="M22 14c-5 0-8 4-8 9 0 6 3 9 4 14 1 6 2 13 5.5 13 3.2 0 3.4-9 8.5-9s5.3 9 8.5 9C44 50 45 43 46 37c1-5 4-8 4-14 0-5-3-9-8-9-4 0-6 2-10 2s-6-2-10-2z" fill="#0E5E6F"/></svg><span>Vital Dent</span></a>
+      <p class="rol">Rol: Paciente</p>
+      <nav class="menu" aria-label="Navegación del paciente">
+        <ul>
+          <li><a href="inicio.html">Inicio</a></li>
+          <li><a href="citas.html">Mis citas</a></li>
+          <li><a href="tratamientos.html" aria-current="page">Tratamientos</a></li>
+          <li><a href="historial.html">Historial médico</a></li>
+          <li><a href="pagos.html">Pagos</a></li>
+          <li><a href="perfil.html">Mi perfil</a></li>
+        </ul>
+      </nav>
+      <!-- RF-06: cerrar sesión se envía con POST para invalidar la sesión en el servidor -->
+      <form action="/api/sesion/cerrar" method="post">
+        <button type="submit">Cerrar sesión</button>
+      </form>
+    </header>
+
+    <div class="principal">
+      <!-- Encabezado de la página: título y usuario con sesión -->
+      <div class="barra-superior">
+        <div>
+          <h1>Mis tratamientos</h1>
+          <p>2 en curso · 1 finalizado</p>
+        </div>
+        <div class="usuario">
+          <span class="avatar" aria-hidden="true">ML</span>
+          <span><strong>Mariana López</strong><br>Paciente</span>
+        </div>
+      </div>
+
+      <main id="contenido" class="contenido">
+        <div class="rejilla rejilla-izq-340">
+          <!-- RF-35: lista de tratamientos del paciente -->
+          <section aria-labelledby="t-lista">
+            <h2 id="t-lista">Tratamientos</h2>
+            <ul class="rejilla" style="list-style:none;margin:0;padding:0">
+            <li>
+              <article class="tarjeta" style="border:2px solid var(--teal)">
+                <h3><a href="#detalle" aria-current="true">Ortodoncia fija</a></h3>
+                <p class="secundario">Desde <time datetime="2026-02-10">10 feb 2026</time> · <span class="estado ok">En curso</span></p>
+                <label class="visualmente-oculto" for="p-2026-02-10">Avance de Ortodoncia fija</label>
+                <progress id="p-2026-02-10" max="100" value="60">60 %</progress>
+                <p class="secundario">Sesión 9 de 15 · <strong>60 %</strong></p>
+              </article>
+            </li>
+            <li>
+              <article class="tarjeta">
+                <h3><a href="#detalle">Endodoncia pieza 36</a></h3>
+                <p class="secundario">Desde <time datetime="2026-10-02">2 oct 2026</time> · <span class="estado ok">En curso</span></p>
+                <label class="visualmente-oculto" for="p-2026-10-02">Avance de Endodoncia pieza 36</label>
+                <progress id="p-2026-10-02" max="100" value="33">33 %</progress>
+                <p class="secundario">Sesión 1 de 3 · <strong>33 %</strong></p>
+              </article>
+            </li>
+            <li>
+              <article class="tarjeta">
+                <h3><a href="#detalle">Limpieza y profilaxis</a></h3>
+                <p class="secundario">Desde <time datetime="2026-08-12">12 ago 2026</time> · <span class="estado neutro">Finalizado</span></p>
+                <label class="visualmente-oculto" for="p-2026-08-12">Avance de Limpieza y profilaxis</label>
+                <progress id="p-2026-08-12" max="100" value="100">100 %</progress>
+                <p class="secundario">1 sesión · <strong>100 %</strong></p>
+              </article>
+            </li>
+            </ul>
+          </section>
+
+          <!-- RF-36: detalle y avance sesión por sesión -->
+          <article id="detalle" class="tarjeta" aria-labelledby="t-detalle">
+            <header>
+              <h2 id="t-detalle">Ortodoncia fija</h2>
+              <p class="secundario">Dr. Andrés Ruiz · Inició el <time datetime="2026-02-10">10 de febrero de 2026</time> · Fin estimado: abril de 2027</p>
+              <label for="av-detalle">9 de 15 sesiones completadas</label>
+              <progress id="av-detalle" max="15" value="9">60 %</progress>
+            </header>
+
+            <section aria-labelledby="t-avances" style="margin-top:18px">
+              <h3 id="t-avances">Avances registrados por el doctor</h3>
+              <ol class="linea-tiempo" reversed>
+                <li class="programada">
+                  <div class="cabecera"><span>Sesión 10 (programada)</span><time datetime="2026-11-12">12 nov 2026</time></div>
+                  <p class="secundario">Cambio de arco superior.</p>
+                </li>
+                <li>
+                  <div class="cabecera"><span>Sesión 9</span><time datetime="2026-10-24">24 oct 2026</time></div>
+                  <p class="secundario">Ajuste de arcos; alineación de incisivos inferiores al 80 %.</p>
+                </li>
+                <li>
+                  <div class="cabecera"><span>Sesión 8</span><time datetime="2026-09-26">26 sep 2026</time></div>
+                  <p class="secundario">Colocación de ligas intermaxilares. Sin molestias reportadas.</p>
+                </li>
+                <li>
+                  <div class="cabecera"><span>Sesión 7</span><time datetime="2026-08-29">29 ago 2026</time></div>
+                  <p class="secundario">Cambio de ligaduras y revisión de higiene.</p>
+                </li>
+              </ol>
+            </section>
+          </article>
+        </div>
+      </main>
+
+      <footer class="pie">
+        <p>© 2026 Consultorio Vital Dent · Av. Juárez 45, Centro, Huejutla, Hgo. · Tel. <a href="tel:+527898961020">789 896 1020</a></p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

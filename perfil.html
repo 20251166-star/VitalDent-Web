@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portal del paciente de Vital Dent: mi perfil.">
+  <title>Mi perfil · Vital Dent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<!-- RF-17 Actualizar datos de contacto · RF-05 Cambiar contraseña · RF-06 Cerrar sesión · RNF-08, RNF-09, RNF-10 -->
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
+  <div class="portal">
+    <!-- Barra lateral: marca, rol y navegación principal del paciente -->
+    <header class="lateral">
+      <a class="marca" href="inicio.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#fff"/><path d="M22 14c-5 0-8 4-8 9 0 6 3 9 4 14 1 6 2 13 5.5 13 3.2 0 3.4-9 8.5-9s5.3 9 8.5 9C44 50 45 43 46 37c1-5 4-8 4-14 0-5-3-9-8-9-4 0-6 2-10 2s-6-2-10-2z" fill="#0E5E6F"/></svg><span>Vital Dent</span></a>
+      <p class="rol">Rol: Paciente</p>
+      <nav class="menu" aria-label="Navegación del paciente">
+        <ul>
+          <li><a href="inicio.html">Inicio</a></li>
+          <li><a href="citas.html">Mis citas</a></li>
+          <li><a href="tratamientos.html">Tratamientos</a></li>
+          <li><a href="historial.html">Historial médico</a></li>
+          <li><a href="pagos.html">Pagos</a></li>
+          <li><a href="perfil.html" aria-current="page">Mi perfil</a></li>
+        </ul>
+      </nav>
+      <!-- RF-06: cerrar sesión se envía con POST para invalidar la sesión en el servidor -->
+      <form action="/api/sesion/cerrar" method="post">
+        <button type="submit">Cerrar sesión</button>
+      </form>
+    </header>
+
+    <div class="principal">
+      <!-- Encabezado de la página: título y usuario con sesión -->
+      <div class="barra-superior">
+        <div>
+          <h1>Mi perfil</h1>
+          <p>Actualiza tus datos de contacto y tu contraseña</p>
+        </div>
+        <div class="usuario">
+          <span class="avatar" aria-hidden="true">ML</span>
+          <span><strong>Mariana López</strong><br>Paciente</span>
+        </div>
+      </div>
+
+      <main id="contenido" class="contenido">
+        <div class="rejilla rejilla-lateral">
+          <!-- RF-17: actualizar datos de contacto -->
+          <section class="tarjeta" aria-labelledby="t-contacto">
+            <header style="display:flex;gap:14px;align-items:center;margin-bottom:12px">
+              <span class="avatar" aria-hidden="true" style="width:56px;height:56px;font-size:1.2rem">ML</span>
+              <div>
+                <h2 style="margin:0">Mariana López Cruz</h2>
+                <p class="secundario" style="margin:0">Paciente desde febrero de 2026 · Expediente VD-0318</p>
+              </div>
+            </header>
+
+            <form action="/api/perfil/contacto" method="post">
+              <fieldset>
+                <legend id="t-contacto">Datos de contacto</legend>
+                <p class="ayuda">Los campos con <span class="obligatorio" aria-hidden="true">*</span> son obligatorios.</p>
+                <div class="rejilla rejilla-2">
+                  <div class="campo">
+                    <label for="telefono">Teléfono <span class="obligatorio" aria-hidden="true">*</span></label>
+                    <input type="tel" id="telefono" name="telefono" value="7712345678" pattern="[0-9]{10}" inputmode="numeric" autocomplete="tel" required aria-describedby="ayuda-tel">
+                    <p class="ayuda" id="ayuda-tel">10 dígitos, sin espacios.</p>
+                  </div>
+                  <div class="campo">
+                    <label for="correo">Correo electrónico <span class="obligatorio" aria-hidden="true">*</span></label>
+                    <input type="email" id="correo" name="correo" value="mariana.lopez@correo.com" autocomplete="email" required>
+                  </div>
+                </div>
+                <div class="campo">
+                  <label for="domicilio">Domicilio</label>
+                  <input type="text" id="domicilio" name="domicilio" value="Av. Juárez 120, Col. Centro, Huejutla, Hgo." autocomplete="street-address">
+                </div>
+                <div class="campo">
+                  <label for="emergencia">Contacto de emergencia</label>
+                  <input type="text" id="emergencia" name="emergencia" value="Rosa Cruz · 771 998 0011">
+                </div>
+              </fieldset>
+              <p class="aviso info">Tu nombre y tus datos clínicos solo los puede modificar el doctor.</p>
+              <div class="acciones">
+                <button class="boton secundario-btn" type="reset">Cancelar</button>
+                <button class="boton" type="submit">Guardar cambios</button>
+              </div>
+            </form>
+          </section>
+
+          <div class="rejilla">
+            <!-- RF-05: cambiar contraseña -->
+            <section class="tarjeta" aria-labelledby="t-contrasena">
+              <h2 id="t-contrasena">Cambiar contraseña</h2>
+              <form action="/api/perfil/contrasena" method="post">
+                <div class="campo">
+                  <label for="actual">Contraseña actual <span class="obligatorio" aria-hidden="true">*</span></label>
+                  <input type="password" id="actual" name="actual" autocomplete="current-password" required>
+                </div>
+                <div class="campo">
+                  <label for="nueva">Contraseña nueva <span class="obligatorio" aria-hidden="true">*</span></label>
+                  <input type="password" id="nueva" name="nueva" autocomplete="new-password" minlength="8" pattern="(?=.*[A-Z])(?=.*[0-9]).{8,}" required aria-describedby="reglas">
+                  <p class="ayuda" id="reglas">Mínimo 8 caracteres, una mayúscula y un número. Debe ser distinta a la actual.</p>
+                </div>
+                <div class="campo">
+                  <label for="confirmar">Confirmar contraseña nueva <span class="obligatorio" aria-hidden="true">*</span></label>
+                  <input type="password" id="confirmar" name="confirmar" autocomplete="new-password" required aria-invalid="true" aria-describedby="error-confirmar">
+                  <p class="mensaje-error" id="error-confirmar" role="alert">Las contraseñas no coinciden.</p>
+                </div>
+                <button class="boton" type="submit">Actualizar contraseña</button>
+              </form>
+            </section>
+
+            <!-- RF-06: cerrar sesión -->
+            <section class="tarjeta" aria-labelledby="t-salir">
+              <h2 id="t-salir">Cerrar sesión</h2>
+              <p class="secundario">Sal de tu cuenta en este navegador.</p>
+              <form action="/api/sesion/cerrar" method="post">
+                <button class="boton peligro" type="submit">Cerrar sesión</button>
+              </form>
+            </section>
+          </div>
+        </div>
+      </main>
+
+      <footer class="pie">
+        <p>© 2026 Consultorio Vital Dent · Av. Juárez 45, Centro, Huejutla, Hgo. · Tel. <a href="tel:+527898961020">789 896 1020</a></p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

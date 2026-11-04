@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portal del paciente de Vital Dent: pagos.">
+  <title>Pagos · Vital Dent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<!-- RF-43 Realizar pago · RF-44 Consultar pagos · RNF-10, RNF-17 -->
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
+  <div class="portal">
+    <!-- Barra lateral: marca, rol y navegación principal del paciente -->
+    <header class="lateral">
+      <a class="marca" href="inicio.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#fff"/><path d="M22 14c-5 0-8 4-8 9 0 6 3 9 4 14 1 6 2 13 5.5 13 3.2 0 3.4-9 8.5-9s5.3 9 8.5 9C44 50 45 43 46 37c1-5 4-8 4-14 0-5-3-9-8-9-4 0-6 2-10 2s-6-2-10-2z" fill="#0E5E6F"/></svg><span>Vital Dent</span></a>
+      <p class="rol">Rol: Paciente</p>
+      <nav class="menu" aria-label="Navegación del paciente">
+        <ul>
+          <li><a href="inicio.html">Inicio</a></li>
+          <li><a href="citas.html">Mis citas</a></li>
+          <li><a href="tratamientos.html">Tratamientos</a></li>
+          <li><a href="historial.html">Historial médico</a></li>
+          <li><a href="pagos.html" aria-current="page">Pagos</a></li>
+          <li><a href="perfil.html">Mi perfil</a></li>
+        </ul>
+      </nav>
+      <!-- RF-06: cerrar sesión se envía con POST para invalidar la sesión en el servidor -->
+      <form action="/api/sesion/cerrar" method="post">
+        <button type="submit">Cerrar sesión</button>
+      </form>
+    </header>
+
+    <div class="principal">
+      <!-- Encabezado de la página: título y usuario con sesión -->
+      <div class="barra-superior">
+        <div>
+          <h1>Pagos</h1>
+          <p>Realiza y consulta tus pagos</p>
+        </div>
+        <div class="usuario">
+          <span class="avatar" aria-hidden="true">ML</span>
+          <span><strong>Mariana López</strong><br>Paciente</span>
+        </div>
+      </div>
+
+      <main id="contenido" class="contenido">
+        <div class="rejilla rejilla-lateral">
+          <!-- RF-44: historial de pagos -->
+          <section aria-labelledby="t-historial-pagos">
+            <h2 id="t-historial-pagos">Historial de pagos</h2>
+            <div class="tabla-contenedor">
+              <table>
+                <caption class="visualmente-oculto">Pagos realizados en 2026</caption>
+                <thead>
+                  <tr><th scope="col">Fecha</th><th scope="col">Concepto</th><th scope="col">Medio</th><th scope="col">Monto</th><th scope="col">Estado</th><th scope="col"><span class="visualmente-oculto">Comprobante</span></th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><time datetime="2026-10-24">24 oct 2026</time></td><td>Ortodoncia · mensualidad</td><td>Visa •• 4821</td><td><data value="950">$950.00</data></td><td><span class="estado ok">Aprobado</span></td><td><a href="/comprobantes/VD-2026-10-00377.pdf">Comprobante</a></td></tr>
+                  <tr><td><time datetime="2026-10-02">2 oct 2026</time></td><td>Endodoncia · sesión 1</td><td>Visa •• 4821</td><td><data value="1800">$1,800.00</data></td><td><span class="estado ok">Aprobado</span></td><td><a href="/comprobantes/VD-2026-10-00312.pdf">Comprobante</a></td></tr>
+                  <tr><td><time datetime="2026-09-26">26 sep 2026</time></td><td>Ortodoncia · mensualidad</td><td>Débito •• 1093</td><td><data value="950">$950.00</data></td><td><span class="estado error">Rechazado</span></td><td></td></tr>
+                  <tr><td><time datetime="2026-09-26">26 sep 2026</time></td><td>Ortodoncia · mensualidad</td><td>Visa •• 4821</td><td><data value="950">$950.00</data></td><td><span class="estado ok">Aprobado</span></td><td><a href="/comprobantes/VD-2026-09-00288.pdf">Comprobante</a></td></tr>
+                  <tr><td><time datetime="2026-02-10">10 feb 2026</time></td><td>Consulta de valoración</td><td>Visa •• 4821</td><td><data value="400">$400.00</data></td><td><span class="estado ok">Aprobado</span></td><td><a href="/comprobantes/VD-2026-02-00041.pdf">Comprobante</a></td></tr>
+                </tbody>
+                <tfoot>
+                  <tr><th scope="row" colspan="3">Total pagado en 2026</th><td colspan="3"><data value="4100"><strong>$4,100.00</strong></data></td></tr>
+                </tfoot>
+              </table>
+            </div>
+          </section>
+
+          <!-- RF-43: realizar pago (RNF-17: datos de tarjeta protegidos) -->
+          <section id="realizar-pago" class="tarjeta" aria-labelledby="t-pagar">
+            <h2 id="t-pagar">Realizar pago</h2>
+            <form action="/api/pagos" method="post" autocomplete="on">
+              <div class="campo">
+                <label for="concepto">Concepto <span class="obligatorio" aria-hidden="true">*</span></label>
+                <select id="concepto" name="concepto" required>
+                  <option value="trat-36-s2" selected>Endodoncia pieza 36 · sesión 2 · $1,800.00</option>
+                </select>
+              </div>
+
+              <p class="aviso info" style="display:flex;justify-content:space-between;align-items:center">
+                <span>Total a pagar</span>
+                <output name="total" for="concepto"><strong style="font-size:1.3rem">$1,800.00</strong></output>
+              </p>
+
+              <fieldset>
+                <legend>Medio de pago <span class="obligatorio" aria-hidden="true">*</span></legend>
+                <label class="opcion"><input type="radio" name="medio" value="tarjeta-4821" checked required> Visa •••• 4821 · vence 08/28</label>
+                <label class="opcion"><input type="radio" name="medio" value="nueva"> Agregar tarjeta nueva</label>
+              </fieldset>
+
+              <p class="aviso info">Pago cifrado por conexión segura. Vital Dent no guarda el número completo de tu tarjeta.</p>
+              <button class="boton" type="submit">Pagar $1,800.00</button>
+              <p class="ayuda" style="text-align:center">En la app móvil, el pago se autoriza con tu huella.</p>
+            </form>
+          </section>
+        </div>
+      </main>
+
+      <footer class="pie">
+        <p>© 2026 Consultorio Vital Dent · Av. Juárez 45, Centro, Huejutla, Hgo. · Tel. <a href="tel:+527898961020">789 896 1020</a></p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portal del paciente de Vital Dent: mis citas.">
+  <title>Mis citas · Vital Dent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<!-- RF-34 Consultar citas · RF-41 Agendar cita · RF-19 Validar disponibilidad · RNF-07, RNF-08, RNF-09 -->
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
+  <div class="portal">
+    <!-- Barra lateral: marca, rol y navegación principal del paciente -->
+    <header class="lateral">
+      <a class="marca" href="inicio.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#fff"/><path d="M22 14c-5 0-8 4-8 9 0 6 3 9 4 14 1 6 2 13 5.5 13 3.2 0 3.4-9 8.5-9s5.3 9 8.5 9C44 50 45 43 46 37c1-5 4-8 4-14 0-5-3-9-8-9-4 0-6 2-10 2s-6-2-10-2z" fill="#0E5E6F"/></svg><span>Vital Dent</span></a>
+      <p class="rol">Rol: Paciente</p>
+      <nav class="menu" aria-label="Navegación del paciente">
+        <ul>
+          <li><a href="inicio.html">Inicio</a></li>
+          <li><a href="citas.html" aria-current="page">Mis citas</a></li>
+          <li><a href="tratamientos.html">Tratamientos</a></li>
+          <li><a href="historial.html">Historial médico</a></li>
+          <li><a href="pagos.html">Pagos</a></li>
+          <li><a href="perfil.html">Mi perfil</a></li>
+        </ul>
+      </nav>
+      <!-- RF-06: cerrar sesión se envía con POST para invalidar la sesión en el servidor -->
+      <form action="/api/sesion/cerrar" method="post">
+        <button type="submit">Cerrar sesión</button>
+      </form>
+    </header>
+
+    <div class="principal">
+      <!-- Encabezado de la página: título y usuario con sesión -->
+      <div class="barra-superior">
+        <div>
+          <h1>Mis citas</h1>
+          <p>Consulta tus citas y agenda una nueva</p>
+        </div>
+        <div class="usuario">
+          <span class="avatar" aria-hidden="true">ML</span>
+          <span><strong>Mariana López</strong><br>Paciente</span>
+        </div>
+      </div>
+
+      <main id="contenido" class="contenido">
+        <div class="rejilla rejilla-lateral">
+          <div class="rejilla">
+            <!-- RF-34: listado de citas próximas y anteriores -->
+            <section aria-labelledby="t-proximas">
+              <h2 id="t-proximas">Próximas citas</h2>
+              <div class="tabla-contenedor">
+                <table>
+                  <caption class="visualmente-oculto">Citas programadas</caption>
+                  <thead>
+                    <tr><th scope="col">Fecha</th><th scope="col">Hora</th><th scope="col">Motivo</th><th scope="col">Doctor</th><th scope="col">Estado</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><time datetime="2026-11-12">Jue 12 nov 2026</time></td><td><time datetime="10:30">10:30 a. m.</time></td><td>Ajuste de brackets</td><td>Dr. Andrés Ruiz</td><td><span class="estado ok">Confirmada</span></td></tr>
+                    <tr><td><time datetime="2026-12-03">Jue 3 dic 2026</time></td><td><time datetime="16:00">4:00 p. m.</time></td><td>Limpieza dental</td><td>Dr. Andrés Ruiz</td><td><span class="estado pendiente">Pendiente</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section aria-labelledby="t-anteriores">
+              <h2 id="t-anteriores">Citas anteriores</h2>
+              <div class="tabla-contenedor">
+                <table>
+                  <caption class="visualmente-oculto">Historial de citas</caption>
+                  <thead>
+                    <tr><th scope="col">Fecha</th><th scope="col">Hora</th><th scope="col">Motivo</th><th scope="col">Estado</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><time datetime="2026-10-24">Sáb 24 oct 2026</time></td><td>11:00 a. m.</td><td>Ajuste de brackets</td><td><span class="estado neutro">Atendida</span></td></tr>
+                    <tr><td><time datetime="2026-10-02">Vie 2 oct 2026</time></td><td>5:30 p. m.</td><td>Revisión molar</td><td><span class="estado error">Cancelada</span></td></tr>
+                    <tr><td><time datetime="2026-09-26">Sáb 26 sep 2026</time></td><td>11:00 a. m.</td><td>Ajuste de brackets</td><td><span class="estado neutro">Atendida</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <!-- RF-41 y RF-19: agendar cita mostrando solo horarios disponibles -->
+          <section id="agendar" class="tarjeta" aria-labelledby="t-agendar">
+            <h2 id="t-agendar">Agendar nueva cita</h2>
+            <form action="/api/citas" method="post">
+              <p class="ayuda">Los campos con <span class="obligatorio" aria-hidden="true">*</span> son obligatorios.</p>
+
+              <div class="campo">
+                <label for="fecha">Fecha <span class="obligatorio" aria-hidden="true">*</span></label>
+                <input type="date" id="fecha" name="fecha" value="2026-11-12" min="2026-11-03" required>
+              </div>
+
+              <fieldset>
+                <legend>Hora disponible <span class="obligatorio" aria-hidden="true">*</span></legend>
+                <div class="horarios">
+                <label><input type="radio" name="hora" value="09:00" disabled required><span>9:00</span><span class="visualmente-oculto"> (ocupado)</span></label>
+                <label><input type="radio" name="hora" value="09:30"><span>9:30</span></label>
+                <label><input type="radio" name="hora" value="10:00" disabled><span>10:00</span><span class="visualmente-oculto"> (ocupado)</span></label>
+                <label><input type="radio" name="hora" value="10:30" checked><span>10:30</span></label>
+                <label><input type="radio" name="hora" value="11:00"><span>11:00</span></label>
+                <label><input type="radio" name="hora" value="11:30" disabled><span>11:30</span><span class="visualmente-oculto"> (ocupado)</span></label>
+                <label><input type="radio" name="hora" value="16:00"><span>4:00</span></label>
+                <label><input type="radio" name="hora" value="16:30"><span>4:30</span></label>
+                </div>
+                <p class="ayuda">Los horarios tachados ya están ocupados.</p>
+              </fieldset>
+
+              <div class="campo">
+                <label for="motivo">Motivo de la cita <span class="obligatorio" aria-hidden="true">*</span></label>
+                <select id="motivo" name="motivo" required>
+                  <option value="">Selecciona un motivo</option>
+                  <option selected>Ajuste de brackets</option>
+                  <option>Limpieza dental</option>
+                  <option>Revisión o dolor</option>
+                  <option>Valoración general</option>
+                </select>
+              </div>
+
+              <button class="boton" type="submit">Confirmar cita</button>
+            </form>
+          </section>
+        </div>
+      </main>
+
+      <footer class="pie">
+        <p>© 2026 Consultorio Vital Dent · Av. Juárez 45, Centro, Huejutla, Hgo. · Tel. <a href="tel:+527898961020">789 896 1020</a></p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

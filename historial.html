@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portal del paciente de Vital Dent: historial médico.">
+  <title>Historial médico · Vital Dent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<!-- RF-42 Consultar historial médico (solo lectura) · RNF-12, RNF-14 -->
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
+  <div class="portal">
+    <!-- Barra lateral: marca, rol y navegación principal del paciente -->
+    <header class="lateral">
+      <a class="marca" href="inicio.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#fff"/><path d="M22 14c-5 0-8 4-8 9 0 6 3 9 4 14 1 6 2 13 5.5 13 3.2 0 3.4-9 8.5-9s5.3 9 8.5 9C44 50 45 43 46 37c1-5 4-8 4-14 0-5-3-9-8-9-4 0-6 2-10 2s-6-2-10-2z" fill="#0E5E6F"/></svg><span>Vital Dent</span></a>
+      <p class="rol">Rol: Paciente</p>
+      <nav class="menu" aria-label="Navegación del paciente">
+        <ul>
+          <li><a href="inicio.html">Inicio</a></li>
+          <li><a href="citas.html">Mis citas</a></li>
+          <li><a href="tratamientos.html">Tratamientos</a></li>
+          <li><a href="historial.html" aria-current="page">Historial médico</a></li>
+          <li><a href="pagos.html">Pagos</a></li>
+          <li><a href="perfil.html">Mi perfil</a></li>
+        </ul>
+      </nav>
+      <!-- RF-06: cerrar sesión se envía con POST para invalidar la sesión en el servidor -->
+      <form action="/api/sesion/cerrar" method="post">
+        <button type="submit">Cerrar sesión</button>
+      </form>
+    </header>
+
+    <div class="principal">
+      <!-- Encabezado de la página: título y usuario con sesión -->
+      <div class="barra-superior">
+        <div>
+          <h1>Historial médico</h1>
+          <p>Consultas, recetas y tratamientos en orden cronológico</p>
+        </div>
+        <div class="usuario">
+          <span class="avatar" aria-hidden="true">ML</span>
+          <span><strong>Mariana López</strong><br>Paciente</span>
+        </div>
+      </div>
+
+      <main id="contenido" class="contenido">
+        <p class="aviso alerta" role="note">Esta información es de solo lectura. Si encuentras un dato incorrecto, coméntalo con tu doctor en tu próxima cita.</p>
+
+        <div class="rejilla rejilla-izq-280">
+          <!-- Datos clínicos generales (solo lectura) -->
+          <aside class="tarjeta" aria-labelledby="t-datos">
+            <h2 id="t-datos">Datos clínicos</h2>
+            <dl class="datos" style="grid-template-columns:1fr">
+              <dt>Alergias</dt>
+              <dd><span class="estado error">Penicilina</span> <span class="estado error">Látex</span></dd>
+              <dt>Antecedentes</dt>
+              <dd>Extracciones, resinas</dd>
+              <dt>Enfermedades</dt>
+              <dd>Ninguna registrada</dd>
+              <dt>Tipo de sangre</dt>
+              <dd>O+</dd>
+            </dl>
+          </aside>
+
+          <!-- RF-42: historial cronológico -->
+          <section aria-labelledby="t-registros">
+            <h2 id="t-registros">Registros</h2>
+            <form class="opciones" role="search" action="historial.html" method="get" style="display:flex;margin-bottom:12px">
+              <label class="visualmente-oculto" for="filtro">Filtrar por tipo</label>
+              <select id="filtro" name="tipo" style="width:auto">
+                <option value="">Todos los registros</option>
+                <option value="cita">Citas</option>
+                <option value="consulta">Consultas</option>
+                <option value="receta">Recetas</option>
+                <option value="tratamiento">Tratamientos</option>
+              </select>
+              <button class="boton secundario-btn" type="submit">Filtrar</button>
+              <button class="boton secundario-btn" type="button" onclick="window.print()">Imprimir</button>
+            </form>
+            <div class="tabla-contenedor">
+              <table>
+                <caption class="visualmente-oculto">Historial médico de Mariana López Cruz, del más reciente al más antiguo</caption>
+                <thead>
+                  <tr><th scope="col">Fecha</th><th scope="col">Tipo</th><th scope="col">Detalle</th><th scope="col">Doctor</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><time datetime="2026-10-24">24 oct 2026</time></td><td><span class="estado neutro">Cita</span></td><td>Ajuste de brackets · atendida</td><td>Dr. Andrés Ruiz</td></tr>
+                  <tr><td><time datetime="2026-10-24">24 oct 2026</time></td><td><span class="estado ok">Consulta</span></td><td>Diagnóstico: caries profunda en pieza 36. Seguimiento en 1 semana.</td><td>Dr. Andrés Ruiz</td></tr>
+                  <tr><td><time datetime="2026-10-24">24 oct 2026</time></td><td><span class="estado pendiente">Receta</span></td><td>Ibuprofeno 400 mg, 1 tableta cada 8 h por 3 días.</td><td>Dr. Andrés Ruiz</td></tr>
+                  <tr><td><time datetime="2026-10-02">2 oct 2026</time></td><td><span class="estado neutro">Tratamiento</span></td><td>Inicio de endodoncia en pieza 36 (3 sesiones).</td><td>Dr. Andrés Ruiz</td></tr>
+                  <tr><td><time datetime="2026-09-26">26 sep 2026</time></td><td><span class="estado ok">Consulta</span></td><td>Seguimiento de ortodoncia; colocación de ligas.</td><td>Dr. Andrés Ruiz</td></tr>
+                  <tr><td><time datetime="2026-02-10">10 feb 2026</time></td><td><span class="estado ok">Consulta</span></td><td>Valoración inicial: apiñamiento dental moderado.</td><td>Dr. Andrés Ruiz</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="pie">
+        <p>© 2026 Consultorio Vital Dent · Av. Juárez 45, Centro, Huejutla, Hgo. · Tel. <a href="tel:+527898961020">789 896 1020</a></p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

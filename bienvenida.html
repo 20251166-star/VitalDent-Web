@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cuestionario inicial del paciente de Vital Dent.">
+  <title>Cuestionario inicial · Vital Dent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<!-- RF-12 Cuestionario inicial en el primer acceso · RF-13 Validar datos del paciente · RNF-08, RNF-09, RNF-12 -->
+<body class="simple">
+  <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
+  <header>
+    <a class="marca" href="inicio.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="18" fill="#0E5E6F"/><path d="M22 14c-5 0-8 4-8 9 0 6 3 9 4 14 1 6 2 13 5.5 13 3.2 0 3.4-9 8.5-9s5.3 9 8.5 9C44 50 45 43 46 37c1-5 4-8 4-14 0-5-3-9-8-9-4 0-6 2-10 2s-6-2-10-2z" fill="#fff"/></svg><span>Vital Dent</span></a>
+    <p class="secundario" style="margin:0">Paso 2 de 3</p>
+  </header>
+
+  <main id="contenido">
+    <h1>Cuéntanos sobre ti</h1>
+    <p class="secundario">El doctor revisará esta información antes de tu primera consulta. Los campos con <span class="obligatorio" aria-hidden="true">*</span> son obligatorios.</p>
+
+    <nav aria-label="Progreso del cuestionario">
+      <ol class="pasos">
+        <li class="hecho">Datos personales</li>
+        <li aria-current="step">Antecedentes odontológicos</li>
+        <li>Alergias</li>
+      </ol>
+    </nav>
+
+    <form class="tarjeta" action="/api/paciente/cuestionario" method="post" style="padding:24px">
+      <fieldset>
+        <legend>Antecedentes odontológicos</legend>
+
+        <div class="rejilla rejilla-2">
+          <div class="campo">
+            <label for="motivo">Motivo principal de tu visita <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input type="text" id="motivo" name="motivo" value="Dolor en muela inferior izquierda" required>
+          </div>
+          <div class="campo">
+            <label for="ultima">Última visita al dentista <span class="obligatorio" aria-hidden="true">*</span></label>
+            <select id="ultima" name="ultima_visita" required>
+              <option value="">Selecciona una opción</option>
+              <option>Hace menos de 6 meses</option>
+              <option>Hace 6 a 12 meses</option>
+              <option selected>Hace más de 1 año</option>
+              <option>Nunca</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset>
+          <legend class="etiqueta">¿Has tenido alguno de estos tratamientos? <span class="obligatorio" aria-hidden="true">*</span></legend>
+          <div class="opciones">
+            <label class="opcion"><input type="checkbox" name="tratamientos_previos" value="ortodoncia"> Ortodoncia</label>
+            <label class="opcion"><input type="checkbox" name="tratamientos_previos" value="endodoncia"> Endodoncia</label>
+            <label class="opcion"><input type="checkbox" name="tratamientos_previos" value="extracciones" checked> Extracciones</label>
+            <label class="opcion"><input type="checkbox" name="tratamientos_previos" value="resinas" checked> Resinas</label>
+            <label class="opcion"><input type="checkbox" name="tratamientos_previos" value="ninguno"> Ninguno</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend class="etiqueta">¿Te sangran las encías al cepillarte? <span class="obligatorio" aria-hidden="true">*</span></legend>
+          <div class="opciones" aria-describedby="error-encias">
+            <label class="opcion"><input type="radio" name="sangrado" value="si" required> Sí</label>
+            <label class="opcion"><input type="radio" name="sangrado" value="a-veces"> A veces</label>
+            <label class="opcion"><input type="radio" name="sangrado" value="no"> No</label>
+          </div>
+          <p class="mensaje-error" id="error-encias" role="alert">Selecciona una opción para continuar.</p>
+        </fieldset>
+
+        <div class="campo">
+          <label for="enfermedades">Enfermedades o medicamentos actuales</label>
+          <textarea id="enfermedades" name="enfermedades" placeholder="Por ejemplo: diabetes, hipertensión, anticoagulantes…"></textarea>
+        </div>
+      </fieldset>
+
+      <div class="acciones" style="justify-content:space-between">
+        <button class="boton secundario-btn" type="submit" name="accion" value="anterior" formnovalidate>Anterior</button>
+        <button class="boton" type="submit" name="accion" value="siguiente">Guardar y continuar</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
